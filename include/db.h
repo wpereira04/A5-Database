@@ -1,48 +1,80 @@
 ﻿////////////////////////////////////////////////////////
 //
-// ECE 3574, P1, Walter Pereira Cruz
-// File name: computron.h
-// Description: Contains the declarations for the computron
+// ECE 3574, A5, Walter Pereira Cruz
+// File name: db.h
+// Description: Contains the declarations for the Database class
 // functions and variables
 //				
-// Date:        02/26/2025
+// Date:        03/14/2025
 //
 
-#ifndef COMPUTRON_H
-#define COMPUTRON_H​
-#include <iostream>
-#include <array>
-#include <vector>
+#ifndef DATABASE_H
+#define DATABASE_H
 #include <string>
+#include <iostream>
 #include <stdexcept>
-#include <cmath>
 
-// used as parameters for implementation
-constexpr size_t memorySize{ 100 };
-constexpr int minWord{ -9999 };
-constexpr int maxWord{ 9999 };
+class Database {
+private:
+    //member variable "db" is of string type
+    std::string db;
+    //ToDo
+    
+    //member variable "username" is of string type
+    //ToDo
+    std::string username;
+    //member variable "password" is of string type
+    //ToDo
+    std::string password;
+    //member variable "connected" is of string type
+    //The "connected" is set to false initially.
+    //ToDo
+    bool connected{ false };
+    //member variable "instance" is static 
+    //"instance" (pointer to Database) is a staic variable that stores the instance of the database. Its value is set in the function "getInstance"
+    //ToDo
+    static Database* instance;
+    //constructor that helps creating instance of db(e.g. sales.db) accepts name of the database, username, password. 
+    //ToDo
+    Database(const std::string& dbName, const std::string& usrname, const std::string& pasword)
+        : db(dbName), username(usrname), password(pasword) {}
+public:
+    //destructor that disconnects the connection if connected.
+    //ToDo
+    ~Database();
+    //"getInstance" that creates and returns the instance of the database. If called first time it sets the username and password. However, subsequent time, it matches the database name, username and password and returns the previous instance if matched else it throws std::runtime_error("invalid database name, username or password"). We are using Singleton Design Pattern that creates only one instance of the databse. The instance is still created by the constructor.
+    //ToDo
+    static Database* getInstance(const std::string& dbName, const std::string& usrname, const std::string& pasword);
+    //"connect" that sets "connected" to true (return void)
+    //ToDo
+    void connect();
+    //"disconnect" that sets "connected" to false (return void)
+    //ToDo
+    void disconnect();
+    // retrun status of connected true/false (return bool)
+    //ToDo
+    bool getConnected();
+    //overload the new operator that allocates memory using malloc of given size and returns pointer of type void and prints " overloaded new " (cout is okay in this case). std::cout << "overloaded new ";
+    //If the memory allocation fails it should throw std::bad_alloc()
+    //ToDo
+    void* operator new(size_t size);
+    //overload the delete operator that deallocates memory and prints "overloaded delete " (cout is okay in this). std::cout << "overloaded delete ";
+    //ToDo
+    void operator delete(void* pt);
+    //set_username and get_username for username
+    //ToDo
+    //ToDo
+    void set_username(const std::string& username);
+    std::string get_username();
+    //set_password and get_password for password.
+    //ToDo
+    //ToDo
+    void set_password(const std::string& password);
 
-enum class Command {
-    read = 10, write,
-    load = 20, store,
-    add = 30, subtract, divide, multiply,
-    branch = 40, branchNeg, branchZero, halt
+    std::string get_password();
+    //The static "resetInstance" as defined below.
+    static void resetInstance();
 };
-// loads instructions from a file into the provided memory
-void load_from_file(std::array<int, memorySize>& memory, const std::string& filename);
 
-// executes instructions from a provided memory using the provided ptrs.
-void execute(std::array<int, memorySize>& memory, int* const acPtr,
-    size_t* const icPtr, int* const irPtr,
-    size_t* const opCodePtr, size_t* const opPtr,
-    const std::vector<int>& inputs);
-// prints the information of the memory and variables in a readable way
-void dump(std::array<int, memorySize>& memory, int accumulator,
-    size_t instructionCounter, size_t instructionRegister,
-    size_t operationCode, size_t operand);
-// checks if a word is valid according to minWord and maxWord.
-bool validWord(int word);
-// unused
-void output(std::string label, int width, int value, bool sign);
 
 #endif

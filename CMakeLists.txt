@@ -7,15 +7,5 @@ project(Database)
 # Include the directory headers are located
 include_directories(${CMAKE_SOURCE_DIR}/include)
 # Add the main executable
-add_executable(Database src/main.cpp src/db.cpp)
+add_executable(Database src/db.cpp)
 
-############################################
-
-# Add the test executable
-add_executable(my_test  src/db.cpp test/test.cpp )
-# Include directories for the test target
-target_include_directories(my_test PRIVATE ${PROJECT_SOURCE_DIR}/include)
-# Enable testing
-enable_testing()
-# Register the test executable with CTest (optional)
-# add_test(NAME my_test COMMAND my_test)
