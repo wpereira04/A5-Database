@@ -45,7 +45,7 @@ bool Database::isConnected() {
 
 
 void* Database::operator new(size_t size) {
-	std::cout << "overloaded new\n";
+	std::cout << "overloaded new ";
 	void* ptr = std::malloc(size);
 	if (!ptr) {
 		throw std::bad_alloc();
@@ -54,7 +54,7 @@ void* Database::operator new(size_t size) {
 }
 
 void Database::operator delete(void* pt) {
-	std::cout << "overloaded delete\n";
+	std::cout << "overloaded delete ";
 	std::free(pt);
 }
 
