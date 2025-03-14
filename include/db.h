@@ -53,7 +53,7 @@ public:
     void disconnect();
     // retrun status of connected true/false (return bool)
     //ToDo
-    bool getConnected();
+    bool isConnected();
     //overload the new operator that allocates memory using malloc of given size and returns pointer of type void and prints " overloaded new " (cout is okay in this case). std::cout << "overloaded new ";
     //If the memory allocation fails it should throw std::bad_alloc()
     //ToDo

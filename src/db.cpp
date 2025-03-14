@@ -39,7 +39,7 @@ void Database::disconnect() {
 	connected = false;
 }
 
-bool Database::getConnected() {
+bool Database::isConnected() {
 	return connected;
 }
 
